@@ -1,6 +1,7 @@
 "use client";
 
 import Fuse from "fuse.js";
+import { Crown, Map as MapIcon, ScrollText, Shield, Swords, TrendingUp, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { GuideMeta } from "@/lib/guides";
@@ -9,6 +10,16 @@ type Props = {
   guides: GuideMeta[];
   categories: Record<string, { label: string }>;
   showCategoryFilter?: boolean;
+};
+
+// One icon per guide category (folder name). Unknown categories get no icon.
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  leveling: TrendingUp,
+  farming: MapIcon,
+  "epic-bosses": Crown,
+  builds: Shield,
+  quests: ScrollText,
+  "rates-x10": Swords,
 };
 
 export default function GuideBrowser({ guides, categories, showCategoryFilter = true }: Props) {
@@ -82,7 +93,11 @@ export default function GuideBrowser({ guides, categories, showCategoryFilter = 
               href={`/guides/${g.category}/${g.slug}`}
               className="block h-full rounded-lg border border-panel-edge bg-panel p-5 transition hover:border-gold"
             >
-              <p className="text-xs uppercase tracking-wider text-muted">
+              <p className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-muted">
+                {(() => {
+                  const Icon = CATEGORY_ICONS[g.category];
+                  return Icon ? <Icon className="h-4 w-4 text-gold" aria-hidden="true" /> : null;
+                })()}
                 {categories[g.category]?.label}
                 {g.quest && <span className="ml-2 text-gold-bright">· Quest</span>}
               </p>

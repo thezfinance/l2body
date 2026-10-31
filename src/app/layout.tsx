@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cinzel, Inter } from "next/font/google";
+import { BookOpen, Coins, Hammer, Video } from "lucide-react";
 import Link from "next/link";
 import "./globals.css";
 
@@ -13,10 +14,10 @@ export const metadata: Metadata = {
 };
 
 const nav = [
-  { href: "/guides", label: "Guides" },
-  { href: "/videos", label: "Videos" },
-  { href: "/crafts", label: "Crafts" },
-  { href: "/market", label: "Market" },
+  { href: "/guides", label: "Guides", Icon: BookOpen },
+  { href: "/videos", label: "Videos", Icon: Video },
+  { href: "/crafts", label: "Crafts", Icon: Hammer },
+  { href: "/market", label: "Market", Icon: Coins },
 ];
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -29,9 +30,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               L2body
             </Link>
             <nav className="flex gap-4 text-sm sm:gap-6">
-              {nav.map((n) => (
-                <Link key={n.href} href={n.href} className="text-parchment hover:text-gold-bright">
-                  {n.label}
+              {nav.map(({ href, label, Icon }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="flex items-center gap-1.5 text-parchment hover:text-gold-bright"
+                >
+                  <Icon className="h-4 w-4 text-gold" aria-hidden="true" />
+                  {label}
                 </Link>
               ))}
             </nav>
