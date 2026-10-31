@@ -35,6 +35,21 @@ export default async function GuidePage({ params }: PageProps<"/guides/[category
         {guide.updated && <>Updated {guide.updated} · </>}
         {guide.tags.map((t) => `#${t}`).join(" ")}
       </p>
+      {guide.quest && (
+        <p className="mt-3 inline-block rounded-full border border-gold px-3 py-1 text-xs text-gold-bright">
+          Quest required
+        </p>
+      )}
+      {Object.keys(guide.facts).length > 0 && (
+        <dl className="mt-6 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 rounded-lg border border-panel-edge bg-panel p-4 text-sm">
+          {Object.entries(guide.facts).map(([k, v]) => (
+            <div key={k} className="contents">
+              <dt className="text-muted">{k}</dt>
+              <dd>{v}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
       {guide.youtube && (
         <div className="mt-6">
           <YouTubeEmbed id={guide.youtube} title={guide.title} />

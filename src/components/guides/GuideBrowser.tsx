@@ -77,6 +77,7 @@ export default function GuideBrowser({ guides, categories, showCategoryFilter = 
             >
               <p className="text-xs uppercase tracking-wider text-muted">
                 {categories[g.category]?.label}
+                {g.quest && <span className="ml-2 text-gold-bright">· Quest</span>}
               </p>
               <h2 className="mt-1 text-lg">{g.title}</h2>
               <p className="mt-2 text-sm text-muted">{g.summary}</p>

@@ -7,7 +7,14 @@ const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
 // Folder name -> label shown on the site. To add a category, add a folder and a line here.
 export const CATEGORIES: Record<string, { label: string; blurb: string }> = {
   leveling: { label: "Leveling", blurb: "Fastest ways to climb, level by level." },
-  farming: { label: "Farming Spots", blurb: "Where to hunt for adena, drops and materials." },
+  farming: {
+    label: "Hunting Zones",
+    blurb: "Leveling and farming zones: where to hunt for exp, adena and drops.",
+  },
+  "epic-bosses": {
+    label: "Epic Bosses",
+    blurb: "Epic raid boss guides: requirements, quests, strategy and drops.",
+  },
   builds: { label: "Class Builds", blurb: "Skills, gear and playstyle per class." },
   quests: { label: "Quests", blurb: "Quest walkthroughs and rewards." },
   "rates-x10": { label: "x10 Rates", blurb: "What the x10 rates change and how to use them." },
@@ -21,6 +28,8 @@ export type GuideMeta = {
   tags: string[];
   updated: string;
   youtube: string | null; // YouTube video ID, e.g. "dQw4w9WgXcQ"
+  quest: boolean; // true if the guide involves a quest (shows a badge)
+  facts: Record<string, string>; // quick-facts box, e.g. Level, Location, Respawn
 };
 
 export type Guide = GuideMeta & { content: string };
@@ -41,6 +50,11 @@ function readGuide(category: string, file: string): Guide {
         ? data.updated.toISOString().slice(0, 10)
         : String(data.updated ?? ""),
     youtube: data.youtube ? String(data.youtube) : null,
+    quest: data.quest === true,
+    facts:
+      data.facts && typeof data.facts === "object"
+        ? Object.fromEntries(Object.entries(data.facts).map(([k, v]) => [k, String(v)]))
+        : {},
     content,
   };
 }

@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const sections = [
   { href: "/guides", title: "Guides", text: "Leveling, farming spots, builds, quests and x10 rates." },
+  { href: "/events", title: "Events", text: "Server events and times, in your own time zone." },
   { href: "/videos", title: "Videos", text: "Latest uploads from lolThez." },
   { href: "/crafts", title: "Crafts", text: "Recipes and a profit calculator." },
   { href: "/market", title: "Market", text: "Adena prices, trends and a watchlist." },

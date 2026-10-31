@@ -16,5 +16,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
-      - run: npx tsc --noEmit
+      # Build first: it generates the route types that tsc needs.
       - run: npm run build
+      - run: npx tsc --noEmit
