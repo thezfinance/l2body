@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* Theme colors live here as tokens; use them via Tailwind classes (bg-ink, text-gold, ...). */
+:root {
+  --ink: #0b0a0d;
+  --panel: #15131a;
+  --panel-edge: #2a2433;
+  --gold: #d4a63c;
+  --gold-bright: #f0cc6b;
+  --parchment: #e8dfc8;
+  --muted: #9a917f;
+  --blood: #8a2b2b;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-panel-edge: var(--panel-edge);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-parchment: var(--parchment);
+  --color-muted: var(--muted);
+  --color-blood: var(--blood);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-cinzel);
+}
+
+body {
+  background:
+    radial-gradient(ellipse at top, #1d1726 0%, var(--ink) 60%) fixed,
+    var(--ink);
+  color: var(--parchment);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-cinzel), serif;
+  color: var(--gold-bright);
+  letter-spacing: 0.04em;
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+}
