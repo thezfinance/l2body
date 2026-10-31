@@ -39,7 +39,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </header>
         <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10">{children}</main>
         <footer className="border-t border-panel-edge px-4 py-6 text-center text-xs text-muted">
-          Fan-made. Not affiliated with NCSoft or L2 Reborn. Prices are community-entered.
+          L2body is an unofficial information site about Lineage 2. All exclusive rights to the
+          game and its elements belong to NCSoft. L2body is not affiliated with NCSoft or L2 Reborn.
         </footer>
       </body>
     </html>
