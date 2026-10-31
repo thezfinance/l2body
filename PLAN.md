@@ -239,3 +239,4 @@ Sources: [L2JMobius wiki](https://l2jmobius.org/wiki/), [Reddit thread](https://
 - Guide tags no longer show a # sign; tags that repeat a category name are hidden from the filter.
 - Guide data: l2hub.info is mainly Gracia Final data, has no license or download option and carries an NCsoft rights notice. Use it as a reference only and write our own text; no bulk copying.
 - Crafts idea: generate recipe data once from an Interlude datapack into a JSON file in the repo, and keep calculator prices in the visitor browser. This needs no database, so crafts can ship before Supabase.
+- (2026-10-31) Videos page uses a hand-kept list in src/config/videos.ts (no API key needed yet). Crafts is a working manual calculator. Market is a private price log saved in the visitor browser (localStorage). Shared prices, recipe import, YouTube API and alerts remain for the database phases.
