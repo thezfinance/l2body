@@ -1,24 +1,14 @@
-import type { GameEvent } from "@/lib/events";
+import type { EventType } from "@/lib/events";
 
-// The event list. Times are UTC. Replace the template rows with real server events.
-// To add an event, copy one block, give it a unique id, and set the days and time.
-export const EVENTS: GameEvent[] = [
-  {
-    id: "example-pvp",
-    name: "Example PvP Event",
-    kind: "pvp",
-    description: "Template row: replace with a real event (for example a team battle).",
-    schedule: [{ days: [1, 3, 5], time: "18:00" }],
-    durationMinutes: 60,
-    template: true,
-  },
-  {
-    id: "example-siege",
-    name: "Example Castle Siege",
-    kind: "siege",
-    description: "Template row: replace with the real siege schedule.",
-    schedule: [{ days: [0], time: "20:00" }],
-    durationMinutes: 120,
-    template: true,
-  },
+// A new event starts every SLOT_INTERVAL_HOURS hours, on even UTC hours (00:00, 02:00, ...).
+// The server picks one of the event types at random for each slot, so the type of the next
+// event can't be predicted. A later phase will let the owner record what was picked.
+export const SLOT_INTERVAL_HOURS = 2;
+
+export const EVENT_TYPES: EventType[] = [
+  { id: "mtb", name: "Multi Team Battle", description: "Rules and rewards: to be written." },
+  { id: "ctb", name: "Capture The Base", description: "Rules and rewards: to be written." },
+  { id: "ebc", name: "Epic Boss Challenge", description: "Rules and rewards: to be written." },
+  { id: "ktvt", name: "Korean TvT", description: "Rules and rewards: to be written." },
+  { id: "dm", name: "Death Match", description: "Rules and rewards: to be written." },
 ];

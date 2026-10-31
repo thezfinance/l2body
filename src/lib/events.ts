@@ -1,46 +1,24 @@
-export type EventKind = "boss" | "pvp" | "siege" | "other";
-
-export type GameEvent = {
+export type EventType = {
   id: string;
   name: string;
-  kind: EventKind;
   description: string;
-  // Weekly schedule in UTC. days: 0 = Sunday ... 6 = Saturday. time: "HH:MM" (24h).
-  schedule: { days: number[]; time: string }[];
-  durationMinutes?: number;
-  guide?: string; // optional link to a guide page, e.g. "/guides/epic-bosses/valakas"
-  template?: boolean; // true = placeholder data, shown with a warning badge
+  guide?: string; // optional link to a guide page
 };
 
-export const KIND_LABELS: Record<EventKind, string> = {
-  boss: "Boss",
-  pvp: "PvP",
-  siege: "Siege / Castle",
-  other: "Other",
-};
-
-/** Next start time (ms since epoch) of an event after `from`, or null if it has no schedule. */
-export function nextStart(event: GameEvent, from: number): number | null {
-  const start = new Date(from);
-  let best: number | null = null;
-  for (let offset = 0; offset <= 7; offset++) {
-    for (const slot of event.schedule) {
-      const [h, m] = slot.time.split(":").map(Number);
-      const day = new Date(
-        Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate() + offset, h, m),
-      );
-      if (!slot.days.includes(day.getUTCDay())) continue;
-      const t = day.getTime();
-      if (t > from && (best === null || t < best)) best = t;
-    }
-  }
-  return best;
+/**
+ * Start times of the next `count` event slots after `from` (ms since epoch).
+ * Slots begin on UTC hours that are multiples of `intervalHours` (every 2 hours = 00:00, 02:00, ...).
+ */
+export function nextSlots(from: number, count: number, intervalHours: number): number[] {
+  const step = intervalHours * 3_600_000;
+  const first = Math.floor(from / step) * step + step; // epoch is 00:00 UTC, so this aligns to UTC hours
+  return Array.from({ length: count }, (_, i) => first + i * step);
 }
 
 export function formatCountdown(ms: number): string {
-  const totalMin = Math.max(0, Math.floor(ms / 60000));
-  const d = Math.floor(totalMin / 1440);
-  const h = Math.floor((totalMin % 1440) / 60);
-  const m = totalMin % 60;
-  return [d ? `${d}d` : "", h || d ? `${h}h` : "", `${m}m`].filter(Boolean).join(" ");
+  const totalSec = Math.max(0, Math.floor(ms / 1000));
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+  return h ? `${h}h ${m}m` : `${m}m ${String(s).padStart(2, "0")}s`;
 }
