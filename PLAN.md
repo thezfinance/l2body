@@ -234,7 +234,8 @@ Sources: [L2JMobius wiki](https://l2jmobius.org/wiki/), [Reddit thread](https://
 ---
 
 ## 13. Changes after the guides phase (2026-10-31)
-- Server timezone is UTC (server 18:34 vs owner 20:34 local, UTC+2). Game clock: 1 game day = 4 real hours, calibrated to 21:43 at 18:34 UTC.
-- Events: a slot every 2 hours on even UTC hours; the server picks one of 5 types at random (Multi Team Battle, Capture The Base, Epic Boss Challenge, Korean TvT, Death Match). The page shows the countdown and the 5 types. Recording WHICH type was picked needs the database (owner-only form), so it is part of the Supabase phase.
-- New phase, "Boss tracker" (after Supabase is connected): epic boss respawn timers like Iron Gates. No public L2 Reborn boss feed was found, so the first version is owner-entered (kill time + respawn window). Automatic updates only if the owner finds an official source.
+- Events page and boss respawn tracker were REMOVED: the game times cannot be connected directly, so they would be hand-maintained. Epic boss GUIDES stay.
+- Focus is now: guides, quests, and crafting (materials). Market and videos come after.
+- Guide tags no longer show a # sign; tags that repeat a category name are hidden from the filter.
 - Guide data: l2hub.info is mainly Gracia Final data, has no license or download option and carries an NCsoft rights notice. Use it as a reference only and write our own text; no bulk copying.
+- Crafts idea: generate recipe data once from an Interlude datapack into a JSON file in the repo, and keep calculator prices in the visitor browser. This needs no database, so crafts can ship before Supabase.

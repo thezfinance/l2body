@@ -56,4 +56,5 @@ a:focus-visible, button:focus-visible {
 .guide-body th, .guide-body td { border: 1px solid var(--panel-edge); padding: 0.4rem 0.7rem; text-align: left; }
 .guide-body th { color: var(--gold-bright); background: var(--panel); }
 .guide-body blockquote { border-left: 3px solid var(--gold); padding-left: 1rem; color: var(--muted); margin: 1rem 0; }
+.guide-body img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--panel-edge); margin: 1rem 0; }
 .guide-body code { background: var(--panel); padding: 0.1rem 0.35rem; border-radius: 4px; }

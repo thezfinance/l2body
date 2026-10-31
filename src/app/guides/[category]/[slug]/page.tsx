@@ -32,8 +32,7 @@ export default async function GuidePage({ params }: PageProps<"/guides/[category
       </p>
       <h1 className="mt-2 text-3xl sm:text-4xl">{guide.title}</h1>
       <p className="mt-2 text-sm text-muted">
-        {guide.updated && <>Updated {guide.updated} · </>}
-        {guide.tags.map((t) => `#${t}`).join(" ")}
+        {guide.updated && <>Updated {guide.updated}</>}
       </p>
       {guide.quest && (
         <p className="mt-3 inline-block rounded-full border border-gold px-3 py-1 text-xs text-gold-bright">

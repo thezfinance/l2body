@@ -20,7 +20,14 @@ export default function GuideBrowser({ guides, categories, showCategoryFilter = 
     () => new Fuse(guides, { keys: ["title", "summary", "tags"], threshold: 0.35 }),
     [guides],
   );
-  const allTags = useMemo(() => [...new Set(guides.flatMap((g) => g.tags))].sort(), [guides]);
+  // Tags that repeat a category name are noise (the category buttons already cover them).
+  const allTags = useMemo(
+    () =>
+      [...new Set(guides.flatMap((g) => g.tags))]
+        .filter((t) => !(t in categories) && t !== "epic-boss")
+        .sort(),
+    [guides, categories],
+  );
 
   const results = (query.trim() ? fuse.search(query).map((r) => r.item) : guides).filter(
     (g) => (!category || g.category === category) && (!tag || g.tags.includes(tag)),
@@ -63,7 +70,7 @@ export default function GuideBrowser({ guides, categories, showCategoryFilter = 
         <div className="mt-2 flex flex-wrap gap-2">
           {allTags.map((t) => (
             <button key={t} className={chip(tag === t)} onClick={() => setTag(tag === t ? null : t)}>
-              #{t}
+              {t}
             </button>
           ))}
         </div>
