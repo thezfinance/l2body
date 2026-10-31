@@ -1,27 +1,10 @@
 "use client";
 
 import { Plus, Trash2 } from "lucide-react";
-import { adena, calculateCraft, type Material } from "@/lib/crafts";
+import { adena, calculateCraft, type CalcState, type Material } from "@/lib/crafts";
 import { latestPrice, type PriceEntry } from "@/lib/market";
 import { useLocalStorage } from "@/lib/useLocalStorage";
 
-type State = {
-  productName: string;
-  successRate: number;
-  productCount: number;
-  productPrice: number;
-  attempts: number;
-  materials: Material[];
-};
-
-const DEFAULT_STATE: State = {
-  productName: "",
-  successRate: 100,
-  productCount: 1,
-  productPrice: 0,
-  attempts: 1,
-  materials: [{ name: "", qty: 1, price: 0 }],
-};
 const NO_PRICES: PriceEntry[] = [];
 
 const inputClass =
@@ -55,8 +38,14 @@ function NumberInput({
   );
 }
 
-export default function CraftCalculator() {
-  const [s, setS] = useLocalStorage<State>("l2body:calc", DEFAULT_STATE);
+export default function CraftCalculator({
+  storageKey,
+  initial,
+}: {
+  storageKey: string; // where this calculator saves its numbers in the browser
+  initial: CalcState;
+}) {
+  const [s, setS] = useLocalStorage<CalcState>(storageKey, initial);
   const [prices] = useLocalStorage<PriceEntry[]>("l2body:prices", NO_PRICES);
   const result = calculateCraft(s);
 

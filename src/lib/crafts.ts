@@ -1,5 +1,23 @@
 export type Material = { name: string; qty: number; price: number };
 
+export type CalcState = {
+  productName: string;
+  successRate: number;
+  productCount: number;
+  productPrice: number;
+  attempts: number;
+  materials: Material[];
+};
+
+export const EMPTY_CALC: CalcState = {
+  productName: "",
+  successRate: 100,
+  productCount: 1,
+  productPrice: 0,
+  attempts: 1,
+  materials: [{ name: "", qty: 1, price: 0 }],
+};
+
 export type CraftInput = {
   materials: Material[];
   successRate: number; // percent, 0-100
